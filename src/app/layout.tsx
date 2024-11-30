@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="pl">
-      <body className={`${inter.className}`}>{children}</body>
+      <body className={`${inter.className} text-sm`}>{children}</body>
     </html>
   );
 };
