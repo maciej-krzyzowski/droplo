@@ -1,23 +1,22 @@
 import { type ReactNode } from "react";
+// import { type UseFormRegister } from "react-hook-form";
 import clsx from "clsx";
 
 export const Input = ({
   id,
   className,
   label,
-  type = "text",
-  error,
   placeholder,
-  required,
+  error,
+  // register,
   icon = null,
+  ...rest
 }: {
   id: string;
   className?: string;
   label: string;
-  type?: string;
-  error?: string;
   placeholder?: string;
-  required?: boolean;
+  error?: string;
   icon?: ReactNode;
 }) => {
   return (
@@ -29,7 +28,8 @@ export const Input = ({
       <div className="relative">
         {icon && (
           <div
-            className={clsx("text-secondary-400 absolute left-3 top-1/2 z-0 -translate-y-1/2", {
+            className={clsx("absolute left-3 top-1/2 z-0 -translate-y-1/2", {
+              "text-secondary-400": !error,
               "text-red-600": error,
             })}
           >
@@ -39,16 +39,17 @@ export const Input = ({
 
         <input
           id={id}
-          type={type}
+          type="text"
           placeholder={placeholder}
-          required={required}
           className={clsx(
-            "placeholder:text-secondary-400 relative z-10 mt-[6px] block w-full rounded-md border border-secondary-300 bg-transparent px-3 py-[7px] text-base outline-none",
+            "relative z-10 mt-[6px] block w-full rounded-md border bg-transparent px-3 py-[7px] text-base outline-none",
             {
               "border-red-600 text-red-600 placeholder:text-red-600": error,
+              "placeholder:text-secondary-400 border-secondary-300": !error,
               "pl-10": icon,
             },
           )}
+          {...rest}
         />
       </div>
     </div>

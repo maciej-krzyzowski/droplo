@@ -57,7 +57,9 @@
       "error",
       { "allowNumber": true, "allowBoolean": true }
     ],
-    "no-commonjs": "off"
+    "no-commonjs": "off",
+
+    "@typescript-eslint/no-misused-promises": "off"
   },
   "overrides": [
     {
