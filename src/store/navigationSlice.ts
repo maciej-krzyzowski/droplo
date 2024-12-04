@@ -25,7 +25,7 @@ type TMoveItemPayload = {
 const initialState: TNavigationItem[] = [
   {
     id: "p6dm49x",
-    name: "Diamenty Forbes'a 1",
+    name: "Promocje",
     url: "https://rc32141.redcart.pl/promocje",
     children: [
       {
@@ -44,8 +44,13 @@ const initialState: TNavigationItem[] = [
   },
   {
     id: "o6ygtrn",
-    name: "Diamenty Forbes'a 2",
+    name: "Diamenty Forbes'a",
     url: "https://www.forbes.pl/diamenty",
+  },
+  {
+    id: "o6ygtrp",
+    name: "Diamenty Forbes'a 2",
+    url: "https://www.forbes.pl/diamenty2",
   },
 ];
 

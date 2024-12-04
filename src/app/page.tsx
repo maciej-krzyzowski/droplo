@@ -4,9 +4,11 @@ import React, { useState } from "react";
 
 import { useSelector } from "react-redux";
 import { Button } from "@/components/Button";
-import { Navigation } from "@/components/Navigation";
-import { NavigationForm } from "@/components/NavigationForm";
-import { NavigationNoContent } from "@/components/NavigationNoContent";
+import {
+  Navigation,
+  NavigationForm,
+  NavigationNoContent,
+} from "@/components/Navigation";
 import { type RootState } from "@/store/store";
 
 const NavigationPage = () => {

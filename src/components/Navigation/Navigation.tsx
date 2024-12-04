@@ -13,9 +13,8 @@ import {
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 import { useState } from "react";
 import { type RootState } from "@/store/store";
-import { NavigationList } from "@/components/NavigationList";
+import { NavigationList, NavigationListItem } from "@/components/Navigation";
 import { moveItem } from "@/store/navigationSlice";
-import { NavigationListItem } from "@/components/NavigationListItem";
 import { type TNavigationItem } from "@/types/navigation";
 
 export const Navigation = () => {

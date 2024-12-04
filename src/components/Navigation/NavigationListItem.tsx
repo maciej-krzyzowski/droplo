@@ -9,11 +9,9 @@ import {
   type TNavigationItem,
   type TNavigationFormType,
 } from "@/types/navigation";
-import { NavigationList } from "@/components/NavigationList";
+import { NavigationList, NavigationForm } from "@/components/Navigation";
 import { IconMove } from "@/components/Icon";
 import { Button } from "@/components/Button";
-
-import { NavigationForm } from "@/components/NavigationForm";
 
 interface NavigationListItemProps {
   item: TNavigationItem;

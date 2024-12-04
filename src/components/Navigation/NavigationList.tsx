@@ -2,7 +2,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { NavigationListItem } from "@/components/NavigationListItem";
+import { NavigationListItem } from "@/components/Navigation";
 import { type TNavigationItem } from "@/types/navigation";
 
 export const NavigationList = ({

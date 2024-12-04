@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Button } from "@/components/Button";
 import { IconPlusCircle } from "@/components/Icon";
-import { NavigationForm } from "@/components/NavigationForm";
+import { NavigationForm } from "@/components/Navigation";
 
 export const NavigationNoContent = () => {
   const [isOpenForm, setIsOpenForm] = useState(false);
