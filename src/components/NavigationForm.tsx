@@ -1,27 +1,75 @@
-"use client";
-
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { useForm, type SubmitHandler } from "react-hook-form";
+
+import { addItem, editItem } from "@/store/navigationSlice";
 import { Button } from "@/components/Button";
 import { IconSearch } from "@/components/Icon";
 import { Input } from "@/components/Input";
+import {
+  type TNavigationForm,
+  type TNavigationFormType,
+  type TNavigationItem,
+} from "@/types/navigation";
 
-type TForm = {
-  name: string;
-  url: string;
+type TProps = {
+  handleCloseForm: () => void;
+  type: TNavigationFormType;
+  item?: TNavigationItem;
+  className?: string;
 };
 
-export const NavigationForm = () => {
+export const NavigationForm = ({
+  handleCloseForm,
+  type = "add",
+  item,
+  className,
+}: TProps) => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TForm>();
+  } = useForm<TNavigationForm>({
+    defaultValues:
+      type === "edit"
+        ? {
+            name: item?.name || "",
+            url: item?.url || "",
+          }
+        : {},
+  });
 
-  const onSubmit: SubmitHandler<TForm> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<TNavigationForm> = useCallback(
+    (data) => {
+      const { name, url } = data;
 
+      if (type === "edit" && item?.id) {
+        dispatch(editItem({ id: item.id, updateItem: { name, url } }));
+      } else {
+        const randomId = Math.random().toString(36).substr(2, 9);
+        dispatch(
+          addItem({
+            parentId: item?.id,
+            item: {
+              name,
+              url,
+              id: randomId,
+            },
+          }),
+        );
+      }
+
+      handleCloseForm();
+    },
+    [dispatch, handleCloseForm, item, type],
+  );
   return (
-    <div className="w-full rounded-md border border-secondary-300 px-6 py-5">
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className={className}>
+      <form
+        className="rounded-md border border-secondary-300 bg-white px-6 py-5"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Input
           id="name"
           label="Nazwa"
@@ -41,7 +89,9 @@ export const NavigationForm = () => {
         />
 
         <div className="mt-5 flex gap-x-2">
-          <Button variant="tertiary">Anuluj</Button>
+          <Button variant="tertiary" onClick={handleCloseForm}>
+            Anuluj
+          </Button>
           <Button variant="secondary" type="submit">
             Dodaj
           </Button>

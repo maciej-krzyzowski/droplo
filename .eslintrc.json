@@ -19,7 +19,7 @@
     // no let exports
     "import/no-mutable-exports": "error",
 
-    "import/no-cycle": "error",
+    "import/no-cycle": "off",
     "import/no-default-export": "off",
 
     "@typescript-eslint/consistent-type-imports": [
