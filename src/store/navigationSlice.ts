@@ -15,24 +15,36 @@ type TEditItemPayload = {
 };
 
 type TMoveItemPayload = {
+  itemId: string;
+  oldParentId: string | null;
+  newParentId: string | null;
   oldIndex: number;
   newIndex: number;
 };
 
 const initialState: TNavigationItem[] = [
   {
-    id: "1",
+    id: "p6dm49x",
     name: "Diamenty Forbes'a 1",
-    url: "https://www.forbes.pl/diamenty",
+    url: "https://rc32141.redcart.pl/promocje",
+    children: [
+      {
+        id: "ej5hadn",
+        name: "Ostatnie 7 dni",
+        url: "https://rc32141.redcart.pl/7dni",
+        children: [
+          {
+            id: "ab0tuv4",
+            name: "Najlepsze",
+            url: "https://rc32141.redcart.pl/najlepsze",
+          },
+        ],
+      },
+    ],
   },
   {
-    id: "2",
+    id: "o6ygtrn",
     name: "Diamenty Forbes'a 2",
-    url: "https://www.forbes.pl/diamenty",
-  },
-  {
-    id: "3",
-    name: "Diamenty Forbes'a 3",
     url: "https://www.forbes.pl/diamenty",
   },
 ];
@@ -88,9 +100,26 @@ const navigationSlice = createSlice({
     },
 
     moveItem: (state, action: PayloadAction<TMoveItemPayload>) => {
-      const { oldIndex, newIndex } = action.payload;
+      const { oldParentId, oldIndex, newIndex } = action.payload;
 
-      return arrayMove(state, oldIndex, newIndex);
+      if (oldParentId === null) {
+        return arrayMove(state, oldIndex, newIndex);
+      }
+
+      const updateChildrenOrder = (items: TNavigationItem[]): boolean => {
+        for (const item of items) {
+          if (item.id === oldParentId && item.children) {
+            item.children = arrayMove(item.children, oldIndex, newIndex);
+            return true;
+          }
+          if (item.children && updateChildrenOrder(item.children)) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      updateChildrenOrder(state);
     },
   },
 });

@@ -8,8 +8,10 @@ import { type TNavigationItem } from "@/types/navigation";
 export const NavigationList = ({
   navigation,
   className,
+  parent,
 }: {
   navigation: TNavigationItem[];
+  parent: boolean;
   className?: string;
 }) => {
   return (
@@ -17,9 +19,15 @@ export const NavigationList = ({
       items={navigation.map((item) => item.id)}
       strategy={verticalListSortingStrategy}
     >
-      <ul className={className}>
-        {navigation.map((item) => (
-          <NavigationListItem key={item.id} item={item} />
+      <ul className={`${className} gap-2`}>
+        {navigation.map((item, index) => (
+          <NavigationListItem
+            key={item.id}
+            item={item}
+            parent={parent}
+            index={index}
+            isLastIndex={index === navigation.length - 1}
+          />
         ))}
       </ul>
     </SortableContext>

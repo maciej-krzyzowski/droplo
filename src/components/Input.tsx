@@ -1,5 +1,4 @@
 import { type ReactNode } from "react";
-// import { type UseFormRegister } from "react-hook-form";
 import clsx from "clsx";
 
 export const Input = ({
@@ -8,7 +7,6 @@ export const Input = ({
   label,
   placeholder,
   error,
-  // register,
   icon = null,
   ...rest
 }: {
@@ -21,7 +19,7 @@ export const Input = ({
 }) => {
   return (
     <div className={className}>
-      <label htmlFor={id} className="text-secondary-600 block font-medium">
+      <label htmlFor={id} className="block font-medium text-secondary-600">
         {label}
       </label>
 
@@ -45,7 +43,7 @@ export const Input = ({
             "relative z-10 mt-[6px] block w-full rounded-md border bg-transparent px-3 py-[7px] text-base outline-none",
             {
               "border-red-600 text-red-600 placeholder:text-red-600": error,
-              "placeholder:text-secondary-400 border-secondary-300": !error,
+              "border-secondary-300 placeholder:text-secondary-400": !error,
               "pl-10": icon,
             },
           )}
